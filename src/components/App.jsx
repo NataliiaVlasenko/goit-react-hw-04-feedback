@@ -23,11 +23,20 @@ import React, { Component } from 'react';
     neutral: 0,
     bad: 0
   }
+  
+ countTotalFeedback = () =>{
+ 
+  return  this.state.good + this.state.neutral + this.state.bad;
+    };
+
+    countPositiveFeedbackPercentage = ()=> {
+if(!this.countTotalFeedback()) {return 0;}
+      return this.state.good * 100 / this.countTotalFeedback();
+    }
 
    render() {
-
-
-    return(
+     return(
+      
 <div>
       <h1>Please leave feedback</h1>
       <button type="button" onClick={() => this.setState(prevState=>({good: prevState.good +1}))}>Good</button>
@@ -38,6 +47,8 @@ import React, { Component } from 'react';
       <p>Good: {this.state.good}</p>
       <p>Neutral:{this.state.neutral}</p>
       <p>Bad:{this.state.bad}</p>
+      <p>Total:{this.countTotalFeedback()}</p>
+      <p>Positive feedback: {this.countPositiveFeedbackPercentage().toFixed()} %</p>
      
 </div>
     )
